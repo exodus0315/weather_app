@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+import 'package:weather_app/data/my_location.dart';
+import 'package:weather_app/data/network.dart';
+import 'package:weather_app/screens/weather_screen.dart';
+
+const apiKey = 'e3e32162e724639657c741e77d4c83b1';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -11,41 +13,42 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+  late double myLatitude;
+  late double myLongitude;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getLocation();
-    fetchData();
   }
 
   void getLocation() async {
-    try {
-      LocationPermission permission = await Geolocator.requestPermission();
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      print(position);
-    } catch (e) {
-      print('Connection Error');
-    }
+    MyLocation myLocation = MyLocation();
+    await myLocation.getMyCurrentLocation();
+    myLatitude = myLocation.latitude2;
+    myLongitude = myLocation.longitude2;
+    print('myLatitude: $myLatitude, myLongitude: $myLongitude');
+
+    Network network = Network(
+        'https://api.openweathermap.org/data/2.5/weather?lat=$myLatitude&lon=$myLongitude&appid=$apiKey&units=metric');
+
+    var weatherData = await network.getJsonData();
+    print('$weatherData');
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return WeatherScreen(parseWeatherData: weatherData);
+    }));
   }
 
-  void fetchData() async {
-    Response response = await get(Uri.parse(
-        'https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1'));
-    if (response.statusCode == 200) {
-      String jsonData = response.body;
-      var weatherCityId = jsonDecode(jsonData)['id'];
-      var weatherCity = jsonDecode(jsonData)['name'];
-      var weatherDescription =
-          jsonDecode(jsonData)['weather'][0]['description'];
-      var weatherWindSpeed = jsonDecode(jsonData)['wind']['speed'];
-      print('weatherCityId : $weatherCityId');
-      print('weatherCity : $weatherCity');
-      print('weatherDescription : $weatherDescription');
-      print('Wind Speed : $weatherWindSpeed');
-    }
-  }
+  // void fetchData() async {
+  //     var weatherCityId = parsingData['id'];
+  //     var weatherDescription = parsingData['weather'][0]['description'];
+  //     print('weatherCityId : $weatherCityId');
+  //     print('weatherDescription : $weatherDescription');
+  //   } else {
+  //     print(response.statusCode);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
