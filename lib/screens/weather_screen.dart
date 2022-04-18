@@ -67,13 +67,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.near_me),
+          icon: const Icon(Icons.near_me),
           iconSize: 30,
         ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.location_searching),
+            icon: const Icon(Icons.location_searching),
             iconSize: 30,
           ),
         ],
@@ -88,7 +88,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
               height: double.infinity,
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -100,7 +100,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 150,
                             ),
                             Text(
@@ -158,7 +158,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             Row(
                               children: [
                                 icon,
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
@@ -177,7 +177,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                   Column(
                     children: [
-                      Divider(
+                      const Divider(
                         height: 15,
                         thickness: 2,
                         color: Colors.white30,
@@ -194,11 +194,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               airIcon,
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               airState,
@@ -213,7 +213,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text(
@@ -223,7 +223,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text(
@@ -245,7 +245,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text(
@@ -255,7 +255,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text(
