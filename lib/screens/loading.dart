@@ -49,24 +49,30 @@ class _LoadingState extends State<Loading> {
     }));
   }
 
-  // void fetchData() async {
-  //     var weatherCityId = parsingData['id'];
-  //     var weatherDescription = parsingData['weather'][0]['description'];
-  //     print('weatherCityId : $weatherCityId');
-  //     print('weatherDescription : $weatherDescription');
-  //   } else {
-  //     print(response.statusCode);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.black,
       body: Center(
-        child: SpinKitDoubleBounce(
-          color: Colors.white,
-          size: 80,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'JIN Weather',
+              style: TextStyle(
+                fontFamily: 'Akshar',
+                fontSize: 30,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            SpinKitWave(
+              color: Colors.white,
+              size: 25,
+            ),
+          ],
         ),
       ),
     );
