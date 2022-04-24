@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:timer_builder/timer_builder.dart';
 import 'package:weather_app/model/model.dart';
+import 'package:weather_app/screens/loading.dart';
 
 class WeatherScreen extends StatefulWidget {
   WeatherScreen({this.parseWeatherData, this.parseAirPollution});
@@ -61,220 +62,207 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        // title: Text(''),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.near_me),
-          iconSize: 30,
-        ),
+        centerTitle: true, // Title 중앙 정렬
+        title: Text('$cityName'),
+        backgroundColor: Colors.transparent, // appBar 투명
+        elevation: 0, // appBar 그림자 제거
+        leading: Container(),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Loading()),
+              );
+            },
             icon: const Icon(Icons.location_searching),
             iconSize: 30,
-          ),
+          ), // 오른쪽 아이콘
         ],
       ),
       body: Container(
-        child: Stack(
-          children: [
-            Image.asset(
-              'image/background.jpg',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        color: Colors.black,
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(
+                height: 150,
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 150,
-                            ),
-                            Text(
-                              '$cityName',
-                              style: GoogleFonts.lato(
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                TimerBuilder.periodic(
-                                  (Duration(minutes: 1)),
-                                  builder: (context) {
-                                    print('${getSystemTime()}');
-                                    return Text(
-                                      '${getSystemTime()}',
-                                      style: GoogleFonts.lato(
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                      ),
-                                    );
-                                  },
-                                ),
-                                Text(
-                                  DateFormat(' - EEEE, ').format(date),
-                                  style: GoogleFonts.lato(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  DateFormat('d MMM, yyy').format(date),
-                                  style: GoogleFonts.lato(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
+                        Text(
+                          '$temp\u2103',
+                          style: GoogleFonts.lato(
+                            fontSize: 100,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white,
+                          ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            icon,
+                            const SizedBox(
+                              width: 20,
+                            ),
                             Text(
-                              '$temp\u2103',
+                              '$desc',
                               style: GoogleFonts.lato(
-                                fontSize: 85,
-                                fontWeight: FontWeight.w300,
+                                fontSize: 16,
                                 color: Colors.white,
                               ),
-                            ),
-                            Row(
-                              children: [
-                                icon,
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  '$desc',
-                                  style: GoogleFonts.lato(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
                             )
                           ],
                         )
                       ],
-                    ),
+                    )
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  const Divider(
+                    height: 15,
+                    thickness: 2,
+                    color: Colors.white30,
                   ),
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Divider(
-                        height: 15,
-                        thickness: 2,
-                        color: Colors.white30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
                         children: [
-                          Column(
-                            children: [
-                              Text(
-                                'AQI(대기질지수)',
-                                style: GoogleFonts.lato(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              airIcon,
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              airState,
-                            ],
+                          Text(
+                            'AQI(대기질지수)',
+                            style: GoogleFonts.lato(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                '미세먼지',
-                                style: GoogleFonts.lato(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                '$dust1',
-                                style: GoogleFonts.lato(
-                                  fontSize: 24,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'ug/m3',
-                                style: GoogleFonts.lato(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                          const SizedBox(
+                            height: 10,
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                '초미세먼지',
-                                style: GoogleFonts.lato(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                '$dust2',
-                                style: GoogleFonts.lato(
-                                  fontSize: 24,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'ug/m3',
-                                style: GoogleFonts.lato(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                          airIcon,
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          airState,
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            '미세먼지',
+                            style: GoogleFonts.lato(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '$dust1',
+                            style: GoogleFonts.lato(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'ug/m3',
+                            style: GoogleFonts.lato(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
-                      )
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            '초미세먼지',
+                            style: GoogleFonts.lato(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '$dust2',
+                            style: GoogleFonts.lato(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'ug/m3',
+                            style: GoogleFonts.lato(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
-          ],
+              const SizedBox(
+                height: 5,
+              ),
+              const Divider(
+                height: 15,
+                thickness: 2,
+                color: Colors.white30,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                // 시간 표현
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    DateFormat('yyyy-MM-dd (EE)  ').format(date),
+                    style: GoogleFonts.lato(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  TimerBuilder.periodic(
+                    (Duration(minutes: 1)),
+                    builder: (context) {
+                      return Text(
+                        '${getSystemTime()}',
+                        style: GoogleFonts.lato(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

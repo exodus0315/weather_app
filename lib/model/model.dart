@@ -10,19 +10,22 @@ class Model {
         color: Colors.black87,
       );
     } else if (condition < 600) {
-      return SvgPicture.asset(
-        'svg/climacon-cloud_snow_alt.svg',
-        color: Colors.black87,
+      return const Icon(
+        Icons.cloudy_snowing,
+        color: Colors.white,
+        size: 70,
       );
     } else if (condition == 800) {
-      return SvgPicture.asset(
-        'svg/climacon-sun.svg',
-        color: Colors.black87,
+      return const Icon(
+        Icons.sunny,
+        color: Colors.white,
+        size: 70,
       );
     } else if (condition <= 804) {
-      return SvgPicture.asset(
-        'svg/climacon-cloud_sun.svg',
-        color: Colors.black87,
+      return const Icon(
+        Icons.cloud,
+        color: Colors.white,
+        size: 30,
       );
     }
   }
@@ -65,14 +68,14 @@ class Model {
     if (index == 1) {
       return Text('매우좋음',
           style: TextStyle(
-            color: Colors.indigo,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ));
     } else if (index == 2) {
       return Text(
         '좋음',
         style: TextStyle(
-          color: Colors.indigo,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -80,7 +83,7 @@ class Model {
       return Text(
         '보통',
         style: TextStyle(
-          color: Colors.black87,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -88,7 +91,7 @@ class Model {
       return Text(
         '나쁨',
         style: TextStyle(
-          color: Colors.black87,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -96,7 +99,7 @@ class Model {
       return Text(
         '매우나쁨',
         style: TextStyle(
-          color: Colors.black87,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       );
