@@ -46,10 +46,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     desc = weatherData['weather'][0]['description'];
     icon = model.getWeatherIcon(condition)!;
     double temp2 = weatherData['main']['temp'];
-
     temp = temp2.round();
-
-    print('cityName: $cityName, temp: $temp');
   }
 
   String getSystemTime() {
@@ -141,7 +138,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       Column(
                         children: [
                           Text(
-                            'AQI(대기질지수)',
+                            '대기질지수(AQI)',
                             style: GoogleFonts.lato(
                               fontSize: 14,
                               color: Colors.white,

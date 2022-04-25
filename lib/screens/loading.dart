@@ -36,7 +36,6 @@ class _LoadingState extends State<Loading> {
         'https://api.openweathermap.org/data/2.5/air_pollution?lat=$myLatitude&lon=$myLongitude&appid=$apiKey');
 
     var weatherData = await network.getJsonData();
-    print('weatherData: $weatherData');
 
     var airData = await network.getAirData();
 

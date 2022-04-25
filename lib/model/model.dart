@@ -9,9 +9,21 @@ class Model {
         'svg/climacon-cloud-lightning.svg',
         color: Colors.black87,
       );
+    } else if (condition < 500) {
+      return const Icon(
+        Icons.umbrella,
+        color: Colors.white,
+        size: 70,
+      );
     } else if (condition < 600) {
       return const Icon(
         Icons.cloudy_snowing,
+        color: Colors.white,
+        size: 70,
+      );
+    } else if (condition < 800) {
+      return const Icon(
+        Icons.foggy,
         color: Colors.white,
         size: 70,
       );
@@ -32,47 +44,47 @@ class Model {
 
   Widget? getAirIcon(int index) {
     if (index == 1) {
-      return Image.asset(
-        'image/good.png',
-        width: 37,
-        height: 35,
+      return const Icon(
+        Icons.mood,
+        size: 35,
+        color: Colors.white,
       );
     } else if (index == 2) {
-      return Image.asset(
-        'image/fair.png',
-        width: 37,
-        height: 35,
+      return const Icon(
+        Icons.sentiment_satisfied,
+        size: 35,
+        color: Colors.white,
       );
     } else if (index == 3) {
-      return Image.asset(
-        'image/moderate.png',
-        width: 37,
-        height: 35,
+      return const Icon(
+        Icons.sentiment_neutral,
+        size: 35,
+        color: Colors.white,
       );
     } else if (index == 4) {
-      return Image.asset(
-        'image/poor.png',
-        width: 37,
-        height: 35,
+      return const Icon(
+        Icons.sentiment_very_dissatisfied,
+        size: 35,
+        color: Colors.white,
       );
     } else if (index == 5) {
-      return Image.asset(
-        'image/bad.png',
-        width: 37,
-        height: 35,
+      return const Icon(
+        Icons.sick,
+        size: 35,
+        color: Colors.white,
       );
     }
   }
 
   Widget? getAirCondition(int index) {
     if (index == 1) {
-      return Text('매우좋음',
+      return const Text('매우좋음',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ));
     } else if (index == 2) {
-      return Text(
+      return const Text(
         '좋음',
         style: TextStyle(
           color: Colors.white,
@@ -80,7 +92,7 @@ class Model {
         ),
       );
     } else if (index == 3) {
-      return Text(
+      return const Text(
         '보통',
         style: TextStyle(
           color: Colors.white,
@@ -88,7 +100,7 @@ class Model {
         ),
       );
     } else if (index == 4) {
-      return Text(
+      return const Text(
         '나쁨',
         style: TextStyle(
           color: Colors.white,
@@ -96,7 +108,7 @@ class Model {
         ),
       );
     } else if (index == 5) {
-      return Text(
+      return const Text(
         '매우나쁨',
         style: TextStyle(
           color: Colors.white,
